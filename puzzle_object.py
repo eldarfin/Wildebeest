@@ -1,0 +1,2 @@
+class puzzle_object:
+	
