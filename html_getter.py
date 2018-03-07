@@ -14,5 +14,3 @@ def get_html():
     html_source = driver.page_source
     driver.close()
     return html_source
-
-print(get_html())
