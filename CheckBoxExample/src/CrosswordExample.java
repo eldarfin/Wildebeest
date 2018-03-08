@@ -14,35 +14,7 @@ class CrosswordExample {
 
     File oldPuzzlesFile = new File("./puzzles.txt");
      Crossword getNewPuzzle() throws FileNotFoundException {
-	/*Crossword c;
-	String title = "Wildebeest";
-	int size = 5;
-	ArrayList<Clue> acrossClues = new ArrayList<Clue>();
-	ArrayList<Clue> downClues = new ArrayList<Clue>();
 	
-        acrossClues.add( new Clue( 1, 0, 0, "Food truck order", "taco") );
-        acrossClues.add( new Clue( 5, 0, 1, "Snowman in \"Frozen\"", "olaf") );
-        acrossClues.add( new Clue( 6, 0, 2, "In a way, that's true", "sorta") );
-        acrossClues.add( new Clue( 8, 0, 3, "Target of a proposed Trump tariff", "steel") );
-        acrossClues.add( new Clue( 9, 2, 4, "Genetic material", "dna") );
-        
-        downClues.add( new Clue( 1, 0, 0, "Beginning of a tennis serve", "toss") );
-        downClues.add( new Clue( 2, 1, 0, "Tons", "alot") );
-        downClues.add( new Clue( 3, 2, 0, "Gave a hoot", "cared") );
-        downClues.add( new Clue( 4, 3, 0, "Much of a time", "often") );
-        downClues.add( new Clue( 7, 4, 2, "Dave Brubeck's \"Blue Rondo ___Turk\"", "ala") );
-        //downClues.add( new Clue( 7, 0, 1, "Boast", "brag") );
-        //downClues.add( new Clue( 11, 3, 4, "Enemy", "foe") );
-        //downClues.add( new Clue( 13, 7, 4, "Doze", "nap") );
-        //downClues.add( new Clue( 14, 0, 6, "Water vapour", "steam") );
-        //downClues.add( new Clue( 15, 2, 6, "Consumed", "eaten") );
-        //downClues.add( new Clue( 16, 4, 6, "Loud, resonant sound", "clang") );
-        //downClues.add( new Clue( 18, 8, 6, "Yellowish, citrus fruit", "lemon") );
-        //downClues.add( new Clue( 19, 10, 6 , "Mongrel dog", "mutt") );
-        //downClues.add( new Clue( 20, 6, 7, "Shut with force", "slam") );
-
-	c = new Crossword(title,size,acrossClues,downClues);
-        */
         
         File newPuzzleFile = new File("./current_puzzle.txt");
         int index = 0;
@@ -86,7 +58,7 @@ class CrosswordExample {
                     lastNull = j;
                 }
             }
-        
+        ArrayList<CluePos> allClues = new ArrayList<>();
 	ArrayList<Clue> acrossClues = new ArrayList<>();
 	ArrayList<Clue> downClues = new ArrayList<>();
         
@@ -105,6 +77,8 @@ class CrosswordExample {
                 length = answersAccross.substring(startIndex).indexOf(' ');
             acrossClues.add( new Clue( i, startX, startY, cluesAndAnswers[i], 
                     answersAccross.substring(startIndex, startIndex+length)));
+            
+            allClues.add(new CluePos(acrossClues.get(acrossClues.size()-1)));
             System.out.println(startX +" "+ startY+" "+  length +" "+ cluesAndAnswers[i]
             + " "+  answersAccross.substring(startIndex, startIndex+length));
         }
@@ -124,25 +98,27 @@ class CrosswordExample {
                 length = answersDown.substring(startIndex).indexOf(' ');
             downClues.add( new Clue( i+accrossStarts.size(), startX, startY, cluesAndAnswers[i+accrossStarts.size()], 
                     answersDown.substring(startIndex, startIndex+length)));
+            allClues.add(new CluePos(downClues.get(downClues.size()-1)));
             System.out.println(startX +" "+ startY+" "+  length +" "+ cluesAndAnswers[i+accrossStarts.size()]
             + " "+ answersDown.substring(startIndex, startIndex+length));
         }
-               
+        Collections.sort(allClues, new clueComparator());   
+        for(CluePos c: allClues){
+            for(int i = 0, duplicates = 0, preVal = -1; i < allClues.size(); i++){
+                
+                if(c.val==allClues.get(i).val){
+                    c.clue.number = i-duplicates+1;
+                    break;
+                }
+                if(preVal==allClues.get(i).val)
+                    duplicates++;
+                preVal = allClues.get(i).val;
+            }
+        }
 	Crossword c;
 	String title = "Wildebeest";
 	int size = 5;
 	
-        
-        /*acrossClues.add( new Clue( 5, 0, 1, "Snowman in \"Frozen\"", "olaf") );
-        acrossClues.add( new Clue( 6, 0, 2, "In a way, that's true", "sorta") );
-        acrossClues.add( new Clue( 8, 0, 3, "Target of a proposed Trump tariff", "steel") );
-        acrossClues.add( new Clue( 9, 2, 4, "Genetic material", "dna") );
-        
-        downClues.add( new Clue( 1, 0, 0, "Beginning of a tennis serve", "toss") );
-        downClues.add( new Clue( 2, 1, 0, "Tons", "alot") );
-        downClues.add( new Clue( 3, 2, 0, "Gave a hoot", "cared") );
-        downClues.add( new Clue( 4, 3, 0, "Much of a time", "often") );
-        downClues.add( new Clue( 7, 4, 2, "Dave Brubeck's \"Blue Rondo ___Turk\"", "ala") );*/
 	c = new Crossword(title,size,acrossClues,downClues);
 	return c;
     }
@@ -188,7 +164,7 @@ class CrosswordExample {
                     lastNull = j;
                 }
             }
-        
+        ArrayList<CluePos> allClues = new ArrayList<>();
 	ArrayList<Clue> acrossClues = new ArrayList<>();
 	ArrayList<Clue> downClues = new ArrayList<>();
         
@@ -207,6 +183,8 @@ class CrosswordExample {
                 length = answersAccross.substring(startIndex).indexOf(' ');
             acrossClues.add( new Clue( i, startX, startY, cluesAndAnswers[i], 
                     answersAccross.substring(startIndex, startIndex+length)));
+            
+            allClues.add(new CluePos(acrossClues.get(acrossClues.size()-1)));
             System.out.println(startX +" "+ startY+" "+  length +" "+ cluesAndAnswers[i]
             + " "+  answersAccross.substring(startIndex, startIndex+length));
         }
@@ -226,25 +204,27 @@ class CrosswordExample {
                 length = answersDown.substring(startIndex).indexOf(' ');
             downClues.add( new Clue( i+accrossStarts.size(), startX, startY, cluesAndAnswers[i+accrossStarts.size()], 
                     answersDown.substring(startIndex, startIndex+length)));
+            allClues.add(new CluePos(downClues.get(downClues.size()-1)));
             System.out.println(startX +" "+ startY+" "+  length +" "+ cluesAndAnswers[i+accrossStarts.size()]
             + " "+ answersDown.substring(startIndex, startIndex+length));
         }
-               
+        Collections.sort(allClues, new clueComparator());   
+        for(CluePos c: allClues){
+            for(int i = 0, duplicates = 0, preVal = -1; i < allClues.size(); i++){
+                
+                if(c.val==allClues.get(i).val){
+                    c.clue.number = i-duplicates+1;
+                    break;
+                }
+                if(preVal==allClues.get(i).val)
+                    duplicates++;
+                preVal = allClues.get(i).val;
+            }
+        }
 	Crossword c;
 	String title = "Wildebeest";
 	int size = 5;
 	
-        
-        /*acrossClues.add( new Clue( 5, 0, 1, "Snowman in \"Frozen\"", "olaf") );
-        acrossClues.add( new Clue( 6, 0, 2, "In a way, that's true", "sorta") );
-        acrossClues.add( new Clue( 8, 0, 3, "Target of a proposed Trump tariff", "steel") );
-        acrossClues.add( new Clue( 9, 2, 4, "Genetic material", "dna") );
-        
-        downClues.add( new Clue( 1, 0, 0, "Beginning of a tennis serve", "toss") );
-        downClues.add( new Clue( 2, 1, 0, "Tons", "alot") );
-        downClues.add( new Clue( 3, 2, 0, "Gave a hoot", "cared") );
-        downClues.add( new Clue( 4, 3, 0, "Much of a time", "often") );
-        downClues.add( new Clue( 7, 4, 2, "Dave Brubeck's \"Blue Rondo ___Turk\"", "ala") );*/
 	c = new Crossword(title,size,acrossClues,downClues);
 	return c;
     } 
@@ -283,5 +263,22 @@ class CustomComparator implements Comparator<Point> {
     @Override
     public int compare(Point o1, Point o2) {
         return o1.y-o2.y;
+    }
+}
+
+class clueComparator implements Comparator<CluePos> {
+
+    @Override
+    public int compare(CluePos o1, CluePos o2) {
+        return o1.val-o2.val;
+    }
+}
+
+class CluePos {
+    int val;
+    Clue clue;
+    public CluePos(Clue cl){
+        clue = cl;
+        val = clue.y*5+clue.x;
     }
 }

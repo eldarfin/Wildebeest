@@ -66,7 +66,7 @@ class Crossword {
  */
 class Clue {
 
-    final int number, x, y; //Clue number and coordinates of the starting cell
+    int number, x, y; //Clue number and coordinates of the starting cell
     final String clue, answer;
     String name, time; // User that solved the clue, and time it was solved
     int orientation, index; // Clue's orientation in the crossword and an index so it can be searched.
