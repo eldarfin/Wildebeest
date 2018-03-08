@@ -30,6 +30,13 @@ for i in range(len(question)):
 for i in range(len(answerRects)):
 	s += answerRects[i].text.lower()
 
-open('current_puzzle.txt', 'w').close()
-with open('current_puzzle.txt', "w+") as f:
-	f.write(s)
+data = []
+with open('puzzles.txt', 'r') as fin:
+    data = fin.read().splitlines(True)
+with open('puzzles.txt', 'w') as fout:
+    fout.writelines(data[1:])
+
+with open("puzzles.txt", 'r+') as f:
+    content = f.read()
+    f.seek(0, 0)
+    f.write(s.rstrip('\r\n') + '\n' + content)

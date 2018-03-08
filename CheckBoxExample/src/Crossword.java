@@ -371,7 +371,7 @@ class CrosswordFrame extends JFrame implements ActionListener, MouseListener,
     //private String solvedCluesText = "";
     private JComboBox cb;
     private JPanel answerPanel;
-    File oldPuzzlesFile = new File("C:\\Users\\onur\\Desktop\\is guc\\CheckBoxExample\\puzzles.txt");
+    File oldPuzzlesFile = new File("../puzzles.txt");
 
     /**
      * Default constructor. Initializes values and makes a new puzzle from
