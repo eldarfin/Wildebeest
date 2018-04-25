@@ -15,7 +15,7 @@ def Nearest(sentence,idf):
     resultingAnswer = answers[0]
     print(len(clues))
     for i in range(len(clues)):
-        print("Left Clue Count: "+ str(len(clues)-i) )
+#        print("Left Clue Count: "+ str(len(clues)-i) )
         p = set(clues[i].split(" ")) & sentenceSet
         score = 0
         for common in p:
@@ -37,10 +37,11 @@ reader = csv.reader(f,delimiter=',')
 clues =[]
 answers = []
 for row in reader:
-    clues.append(row[13].lower())
-    answers.append(row[14].lower())
+	if(len(row[14]) <= 5):
+	    clues.append(row[13].lower())
+	    answers.append(row[14].lower())
 f.close()
-question = "Cry after an opera performance"
+question = "kind of cake made in a ring-shaped pan"
 idf, tf = tfidf(clues)
 print("idf done")
 Nearest(question,idf)

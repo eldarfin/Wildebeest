@@ -1,0 +1,26 @@
+q1 
+b00
+q2 
+00u00
+q3
+renee 
+q4 
+00d00
+q5 
+00t
+q6 
+bundt
+q7 
+00e0
+q8 
+00e0
+q9 
+0r00
+q10
+0e00
+
+
+a1 c1 a2 c2 a3 c3 a4 c4 a5 c6
+a1 c1 a2 c2 ...
+...
+a1 c1 a2 c2 
