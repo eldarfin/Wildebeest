@@ -1128,3 +1128,15 @@ JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 
 JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
 JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
 JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
+1520516524717	geckodriver	INFO	geckodriver 0.19.1
+1520516524720	geckodriver	INFO	Listening on 127.0.0.1:38869
+1520516525820	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-profile" "/tmp/rust_mozprofile.TA5Qr0kDqZhk"
+1520516526426	Marionette	INFO	Enabled via --marionette
+1520516528260	Marionette	INFO	Listening on port 42975
+1520516528338	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
+JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
+JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
+JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
+JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
+JavaScript warning: https://www.googletagmanager.com/gtm.js?id=GTM-P528B3, line 1: unreachable code after return statement
