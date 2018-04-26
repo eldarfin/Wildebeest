@@ -19,7 +19,7 @@ def IsAllZeros(s):
     return True
 
 nltk.download('punkt')
-stopwords = ['i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','to','from','then','once','here','there','when','where','why','how','all','any','such','no','nor','not','only','own','same','so','than']
+stopwords = ['i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','to','from','then','once','here','there','when','where','why','how','all','any','such','no','nor','not','only','own','same','so','than', 'clue', 'times', 'april', 'march', 'may', 'june', 'july', 'daily', 'words', 'site', 'home', 'clues', 'page', 'pages', 'word', 'term', 'terms', 'york', 'check', 'learn', 'home', 'best', 'using', 'title', 'about', 'found', 'later', 'whose', 'today', 'will', 'quiz', 'solve', 'quick', 'park', 'help', 'speed', 'find', 'share', 'again']
 
 def get_ans(q, a):
     url = "http://www.google.com/search?q="
@@ -62,6 +62,7 @@ def get_ans(q, a):
 
     for i in range(len(texts)):
         texts[i] = [t for t in texts[i] if len(t) == len(a)]
+
     for text in texts:
         for i in range(len(text)):
             text[i] = text[i].lower()
@@ -71,6 +72,11 @@ def get_ans(q, a):
 
     for i in range(len(texts)):
         texts[i] = [t for t in texts[i] if not RepresentsInt(t)]
+
+    total_word_count = 0
+    for i in range(len(texts)):
+        total_word_count += len(texts[i])
+
 
     if not IsAllZeros(a):
         for i in range(len(a)):
@@ -103,7 +109,7 @@ def get_ans(q, a):
 
     conf = []
     for o in occ:
-        conf.append(o/sum)
+        conf.append((o/sum) - (o/total_word_count))
     return answers, conf
 
 questions = []
